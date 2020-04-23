@@ -2,6 +2,7 @@ import React from "react";
 import NavHeader from "../../components/NavHeader/index";
 import { area_map, houses } from "../../request/api";
 import { Link } from "react-router-dom";
+import { Toast } from "antd-mobile";
 
 // 导入样式
 // import "./index.scss";
@@ -131,16 +132,27 @@ export default class Map extends React.Component {
   // 1 接收区域 id 参数，获取该区域下的房源数据
   // 2 获取房源类型以及下级地图缩放级别
   async renderOverlays(id) {
-    const res = await area_map({ id });
-    // console.log('renderOverlays 获取到的数据：', res)
-    const data = res.body;
-    // 调用 getTypeAndZoom 方法获取级别和类型
-    const { nextZoom, type } = this.getTypeAndZoom();
+    try {
+      // 开启loading
+      Toast.loading("加载中...", 0, null, false);
 
-    data.forEach((item) => {
-      // 创建覆盖物
-      this.createOverlays(item, nextZoom, type);
-    });
+      const res = await area_map({ id });
+      // 关闭 loading
+      Toast.hide();
+
+      const data = res.body;
+
+      // 调用 getTypeAndZoom 方法获取级别和类型
+      const { nextZoom, type } = this.getTypeAndZoom();
+
+      data.forEach((item) => {
+        // 创建覆盖物
+        this.createOverlays(item, nextZoom, type);
+      });
+    } catch (e) {
+      // 关闭 loading
+      Toast.hide();
+    }
   }
 
   // 计算要绘制的覆盖物类型和下一个缩放级别
@@ -274,14 +286,21 @@ export default class Map extends React.Component {
   }
   // 获取小区房源数据
   async getHousesList(id) {
-    let res = await houses({ id });
-    res = res.body;
-    console.log("小区的房源数据:", res);
-    this.setState({
-      housesList: res.list,
-      // 展示房源列表
-      isShowList: true,
-    });
+    try {
+      // 开启loading
+      Toast.loading("加载中...", 0, null, false);
+      let res = await houses({ id });
+      res = res.body;
+      Toast.hide();
+      this.setState({
+        housesList: res.list,
+        // 展示房源列表
+        isShowList: true,
+      });
+    } catch (e) {
+      // 关闭 loading
+      Toast.hide();
+    }
   }
   // 封装渲染房屋列表的方法
   renderHousesList() {

@@ -6,30 +6,27 @@ import HouseList from "../HouseList/index";
 import Profile from "../Profile/index";
 import { TabBar } from "antd-mobile";
 import "./index.css";
-import { Carousel, WingBlank } from "antd-mobile";
-// TabBar 数据
-import axios from "axios";
 const tabItems = [
   {
     title: "首页",
     icon: "icon-ind",
-    path: "/home"
+    path: "/home",
   },
   {
     title: "找房",
     icon: "icon-findHouse",
-    path: "/home/list"
+    path: "/home/list",
   },
   {
     title: "资讯",
     icon: "icon-infom",
-    path: "/home/news"
+    path: "/home/news",
   },
   {
     title: "我的",
     icon: "icon-my",
-    path: "/home/profile"
-  }
+    path: "/home/profile",
+  },
 ];
 /* 
   问题：点击首页导航菜单，导航到 找房列表 页面时，找房菜单没有高亮
@@ -48,22 +45,9 @@ class Home extends React.Component {
     this.state = {
       // 控制默认高亮菜单
       selectedTab: this.props.location.pathname,
-      data: ["1", "2", "3"],
-      imgHeight: 176
     };
   }
-  componentDidMount() {
-    // simulate img loading
-    setTimeout(() => {
-      this.setState({
-        data: [
-          "AiyWuByWklrrUDlFignR",
-          "TekJlZRVCjLFexlOCuWn",
-          "IJOtIlfsYdTyaDTRVrLI"
-        ]
-      });
-    }, 100);
-  }
+  componentDidMount() {}
   // 组件接收到新的props（此处，实际上是路由信息）就会触发该钩子函数
   componentDidUpdate(prevProps) {
     // prevProps 上一次的props，此处也就是上一次的路由信息
@@ -72,7 +56,7 @@ class Home extends React.Component {
     if (prevProps.location.pathname !== this.props.location.pathname) {
       // 此时，就说明路由发生切换了
       this.setState({
-        selectedTab: this.props.location.pathname
+        selectedTab: this.props.location.pathname,
       });
     }
   }
@@ -87,7 +71,7 @@ class Home extends React.Component {
           selected={this.state.selectedTab === item.path}
           onPress={() => {
             this.setState({
-              selectedTab: item.path
+              selectedTab: item.path,
             });
             this.props.history.push(item.path);
           }}
@@ -96,7 +80,6 @@ class Home extends React.Component {
     });
   }
   render() {
-    console.log(this.props.location.pathname);
     return (
       <div className="home">
         <Route exact path="/home" component={Index}></Route>

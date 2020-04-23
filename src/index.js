@@ -4,10 +4,12 @@ import "antd-mobile/dist/antd-mobile.css";
 import "./assets/fonts/iconfont.css";
 import "./index.css";
 import App from "./App";
-
+import { Provider } from "react-redux";
+import store from "./store";
+// ReactDOM.render(<App />, document.getElementById("root"));
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById("root")
 );

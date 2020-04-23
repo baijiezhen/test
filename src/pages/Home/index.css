@@ -7,6 +7,10 @@
 }
 
 .home .am-tab-bar-bar {
+    height: 50px;
+    overflow: hidden;
     position: fixed;
     bottom: 0;
+    width: 100%;
+    z-index: 0;
 }

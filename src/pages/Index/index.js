@@ -77,6 +77,15 @@ class Index extends React.Component {
       groups: groups,
       news: news,
     });
+    setTimeout(() => {
+      this.setState({
+        data: [
+          "AiyWuByWklrrUDlFignR",
+          "TekJlZRVCjLFexlOCuWn",
+          "IJOtIlfsYdTyaDTRVrLI",
+        ],
+      });
+    }, 100);
     // 2 通过 IP 定位获取到当前城市名称。
     // const curCity = new window.BMap.LocalCity();
     // curCity.get(async res => {
