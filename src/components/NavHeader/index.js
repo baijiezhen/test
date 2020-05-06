@@ -23,7 +23,7 @@ console.log(styles);
 */
 
 function NavHeader({ children, history, onLeftClick }) {
-  console.log(children);
+  // console.log(children);
   // 默认点击行为
   const defaultHandler = () => history.go(-1);
 

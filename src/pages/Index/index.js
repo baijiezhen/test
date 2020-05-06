@@ -7,6 +7,7 @@ import {
   area_info,
 } from "../../request/api";
 import { getCurrentCity } from "../../untils";
+import axios from "axios";
 // 导入导航菜单图片
 import Nav1 from "../../assets/images/nav-1.png";
 import Nav2 from "../../assets/images/nav-2.png";
@@ -63,6 +64,9 @@ class Index extends React.Component {
     };
   }
   async componentDidMount() {
+    axios.get("/home/swiper").then((res) => {
+      console.log(res);
+    });
     let banner = await home_banner();
     let groups = await home_groups({
       area: "AREA%7C88cff55c-aaa4-e2e0",

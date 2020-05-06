@@ -1,4 +1,4 @@
-import { get, post } from "./http";
+import { get, post, DELETE } from "./http";
 // 获取授权问题
 export const home_banner = (p) => get("/home/swiper", p);
 export const home_groups = (p) => get("/home/groups", p);
@@ -13,13 +13,6 @@ export const houses_detail = (id) => get(`/houses/${id}`);
 export const Login_in = (p) => post("/user/login", p);
 export const user = (p, headers) => get("/user", p, headers);
 export const user_logout = (p, headers) => post("/user/logout", p, headers);
-// await API.post("/user/logout", null, {
-//   headers: {
-//     authorization: getToken(),
-//   },
-// });
-//  获取供应端服务条款
-// export const _goods = p => get("/home/main/personal_category", p);
-// export const _Info = p => get("/home/main/product_list", p);
-// export const _Detail = p => get("/home/main/product_detail", p);
-// export const _Poster = p => post("/home/main/poster", p);
+export const is_collect = (id) => get(`/user/favorites/${id}`);
+export const collect = (id) => post(`/user/favorites/${id}`);
+export const del_collect = (id) => DELETE(`/user/favorites/${id}`);

@@ -2,9 +2,10 @@
  * 请求拦截、相应拦截、错误统一处理
  */
 import axios from "axios";
-import QS from "qs";
+// import QS from "qs";
 // import router from "../router/index";
 // 环境的切换
+import { getToken, removeToken } from "../untils/auth";
 console.log(process.env.NODE_ENV);
 // if (process.env.NODE_ENV == 'development') {
 //     axios.defaults.baseURL = '192.168.1.6:80';
@@ -13,7 +14,8 @@ console.log(process.env.NODE_ENV);
 // } else if (process.env.NODE_ENV == 'production') {
 //     axios.defaults.baseURL = '';
 // }
-axios.defaults.baseURL = "/api";
+// https://api-haoke-web.itheima.net/home/swiper
+axios.defaults.baseURL = "http://localhost:8080/";
 // 请求超时时间
 axios.defaults.timeout = 10000;
 // post请求头
@@ -52,6 +54,7 @@ export function get(url, params, headers) {
         resolve(res.data);
       })
       .catch((err) => {
+        console.log(err);
         reject(err.data);
       });
   });
@@ -94,3 +97,40 @@ export function post(url, params) {
       });
   });
 }
+export function DELETE(url, params) {
+  return new Promise((resolve, reject) => {
+    axios
+      .delete(url, params)
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err.data);
+      });
+  });
+}
+// 添加请求拦截器
+axios.interceptors.request.use((config) => {
+  console.log(config, config.url);
+  const { url } = config;
+  if (
+    url.startsWith("/user") &&
+    !url.startsWith("/user/login") &&
+    !url.startsWith("/user/registered")
+  ) {
+    // 添加请求头
+    config.headers.authorization = getToken();
+  }
+  return config;
+});
+
+// 添加响应拦截器
+axios.interceptors.response.use((response) => {
+  // console.log(response)
+  const { status } = response.data;
+  if (status === 400) {
+    // 此时，说明 token 失效，直接移除 token 即可
+    removeToken();
+  }
+  return response;
+});

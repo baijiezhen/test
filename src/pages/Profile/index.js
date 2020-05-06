@@ -31,19 +31,29 @@ export default class Profile extends Component {
     userInfo: {},
   };
   getUserInfo = async () => {
-    let res = await user(null, { authorization: getToken() });
-    let { avatar, nickname } = res.body;
-    if (avatar) {
-      avatar = BASE_URL + avatar;
-    } else {
-      avatar = DEFAULT_AVATAR;
+    if (!this.state.isLogin) {
+      // 未登录
+      return;
     }
-    this.setState({
-      userInfo: {
-        avatar,
-        nickname,
-      },
-    });
+    let res = await user(null, { authorization: getToken() });
+    if (res.status === 200) {
+      let { avatar, nickname } = res.body;
+      if (avatar) {
+        avatar = BASE_URL + avatar;
+      } else {
+        avatar = DEFAULT_AVATAR;
+      }
+      this.setState({
+        userInfo: {
+          avatar,
+          nickname,
+        },
+      });
+    } else {
+      this.setState({
+        isLogin: false,
+      });
+    }
   };
   componentDidMount() {
     this.getUserInfo();
