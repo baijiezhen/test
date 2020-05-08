@@ -15,6 +15,10 @@ console.log(process.env.NODE_ENV);
 //     axios.defaults.baseURL = '';
 // }
 // https://api-haoke-web.itheima.net/home/swiper
+console.log(process.env);
+
+console.log(process.env.REACT_APP_ROOT);
+console.log(process.env.NODE_ENV);
 axios.defaults.baseURL = "http://localhost:8080/";
 // 请求超时时间
 axios.defaults.timeout = 10000;
