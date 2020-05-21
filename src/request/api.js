@@ -16,3 +16,8 @@ export const user_logout = (p, headers) => post("/user/logout", p, headers);
 export const is_collect = (id) => get(`/user/favorites/${id}`);
 export const collect = (id) => post(`/user/favorites/${id}`);
 export const del_collect = (id) => DELETE(`/user/favorites/${id}`);
+export const user_houses = () => get("/user/houses");
+export const area_community = (p) => get("/area/community", p);
+export const houses_image = (p, headers) => post("/houses/image", p, headers);
+export const user_house = (p) => post("/user/houses", p);
+//

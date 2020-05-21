@@ -11,6 +11,9 @@ import Profile from "./pages/Profile/index";
 import Test from "./pages/Test/index";
 import Todo from "./pages/Todo/index";
 import Hooks from "./pages/Hooks/index";
+import Rent from "./pages/Rent/index";
+import RentAdd from "./pages/Rent/Add";
+import RentSearch from "./pages/Rent/Search";
 import "react-virtualized/styles.css";
 function App() {
   return (
@@ -28,6 +31,9 @@ function App() {
         <Route path="/test" component={Test}></Route>
         <Route path="/Todo" component={Todo}></Route>
         <Route path="/Hooks" component={Hooks}></Route>
+        <AuthRoute exact path="/rent" component={Rent}></AuthRoute>
+        <AuthRoute path="/rent/add" component={RentAdd}></AuthRoute>
+        <AuthRoute path="/rent/search" component={RentSearch}></AuthRoute>
       </div>
     </BrowserRouter>
   );

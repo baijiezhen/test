@@ -103,7 +103,11 @@ export default class Profile extends Component {
           />
           <div className={styles.info}>
             <div className={styles.myIcon}>
-              <img className={styles.avatar} src={avatar} alt="icon" />
+              <img
+                className={styles.avatar}
+                src={avatar || DEFAULT_AVATAR}
+                alt="icon"
+              />
             </div>
             <div className={styles.user}>
               <div className={styles.name}>{nickname || "游客"}</div>

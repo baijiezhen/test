@@ -19,7 +19,6 @@ class TodoHeader extends React.Component {
 }
 
 //导出注入后的组件
-// connect 接受一个函数
 export default connect((state) => ({
   ...state, //此时的state就是todos:[...]数据
 }))(TodoHeader);

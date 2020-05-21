@@ -6,7 +6,7 @@ import axios from "axios";
 // import router from "../router/index";
 // 环境的切换
 import { getToken, removeToken } from "../untils/auth";
-console.log(process.env.NODE_ENV);
+console.log(process.env);
 // if (process.env.NODE_ENV == 'development') {
 //     axios.defaults.baseURL = '192.168.1.6:80';
 // } else if (process.env.NODE_ENV == 'debug') {
@@ -15,10 +15,6 @@ console.log(process.env.NODE_ENV);
 //     axios.defaults.baseURL = '';
 // }
 // https://api-haoke-web.itheima.net/home/swiper
-console.log(process.env);
-
-console.log(process.env.REACT_APP_ROOT);
-console.log(process.env.NODE_ENV);
 axios.defaults.baseURL = "http://localhost:8080/";
 // 请求超时时间
 axios.defaults.timeout = 10000;
@@ -115,7 +111,7 @@ export function DELETE(url, params) {
 }
 // 添加请求拦截器
 axios.interceptors.request.use((config) => {
-  console.log(config, config.url);
+  // console.log(config, config.url);
   const { url } = config;
   if (
     url.startsWith("/user") &&
